@@ -56,23 +56,48 @@ int main(){
     //ll_show_all_node(stack->top);
 
     /**************Testing BST*******************/
-    struct Tree_Node* root;
+    // struct Tree_Node* root;
 
-    root = insert_tree_node(root,10);
-    root = insert_tree_node(root,20);
-    root = insert_tree_node(root,30);
-    root = insert_tree_node(root,25);
-    root = insert_tree_node(root,9);
+    // root = insert_tree_node(root,10);
+    // root = insert_tree_node(root,20);
+    // root = insert_tree_node(root,30);
+    // root = insert_tree_node(root,25);
+    // root = insert_tree_node(root,9);
 
-    printf("Inorder traversal before deleting:");
-    inorderTraversal(root);
-    printf("\n");
+    // printf("Inorder traversal before deleting:");
+    // inorderTraversal(root);
+    // printf("\n");
 
-    root = delete_tree_node(root,10);
+    // root = delete_tree_node(root,10);
 
-    printf("Inorder traversal After deleting 10:");
-    inorderTraversal(root);
-    printf("\n");
+    // printf("Inorder traversal After deleting 10:");
+    // inorderTraversal(root);
+    // printf("\n");
+
+    //********************testing queue
+    struct queue queue ;
+    //initialize the rear 
+    queue_start(&queue);
+
+    enqueue(&queue,10);
+    enqueue(&queue,20);
+    enqueue(&queue,30);
+    enqueue(&queue,40);
+    enqueue(&queue,50);
+    enqueue(&queue,60);
+    enqueue(&queue,70);
+    enqueue(&queue,80);
+    enqueue(&queue,90);
+    enqueue(&queue,100);
+    //extra element to test
+    enqueue(&queue,110);
+
+    queue_print_all(&queue);
+    dequeue(&queue);
+    dequeue(&queue);
+    dequeue(&queue);
+    printf("After deleting :\n");
+    queue_print_all(&queue);
 
     
     return 0;

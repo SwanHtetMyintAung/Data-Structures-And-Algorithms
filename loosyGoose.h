@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define  MAX_DATA 10
+#define QUEUE_MAX 10
 
 struct Stack{
     int data[10];
@@ -20,6 +21,11 @@ struct Tree_Node{
     struct Tree_Node *left;
     struct Tree_Node *right;
 
+};
+struct queue{
+    int collection[QUEUE_MAX];
+    //rear will point which index to insert the data
+    int rear;
 };
 //stack
 void stack_initialize(struct Stack* stack);
@@ -46,6 +52,11 @@ struct Tree_Node* create_tree_node(int data);
 struct Tree_Node* insert_tree_node(struct Tree_Node* root , int data);
 struct Tree_Node* find_min_tree_node(struct Tree_Node* root);
 struct Tree_Node* delete_tree_node(struct Tree_Node* root,int data);
+//queue
+void queue_start(struct queue* queue);
+void enqueue(struct queue* queue , int data);
+void dequeue(struct queue* queue);
+void queue_print_all(struct queue* queue);
 
 //*************************stack
 void stack_initialize(struct Stack* stack){
@@ -335,6 +346,46 @@ struct Tree_Node* delete_tree_node(struct Tree_Node* root,int data){
                 return root;
         }
 
+    }
+}
+//************************* queue
+void queue_start(struct queue* queue){
+    queue->rear = -1;
+}
+//add an element
+void enqueue(struct queue* queue , int data){
+    if(queue->rear >= (QUEUE_MAX-1)){
+        printf("the queue is full!\n");
+        return;
+    }
+    //increase the rear
+    if(queue->rear < QUEUE_MAX) queue->rear++;
+    else return;
+    queue->collection[queue->rear] = data;
+}
+//delete the first index element
+void dequeue(struct queue* queue){
+    if(queue->rear == -1){
+        printf("the queue is empty!\n");
+        return;
+    }
+    int i=0;
+    //if current element is not NULL and it hasn't reach the "rear"
+    while(queue->collection[i] && (i <= queue->rear)){
+        //assigning null to current element
+        queue->collection[i] = '\0';
+        //replace the current index with the next one
+        queue->collection[i] = queue->collection[i+1];
+        i++;
+    }
+    queue->rear--;
+}
+//print all elements in a queue
+void queue_print_all(struct queue* queue){
+    int i = 0;
+    //work until it get to "rear"
+    while(queue->collection[i] && (i <= queue->rear)){
+        printf("index %d : %d\n", i-1 , queue->collection[i++]);
     }
 }
 
